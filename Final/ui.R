@@ -1,83 +1,48 @@
-library(plotly)
-library(bslib)
-library(shiny)
-library(dplyr)
+library("shiny")
+library("plotly")
+library("ggplot2")
+library("plotly")
 
-# Read in data
-data_set <- read.csv("C:/UW/INFO201/FINAL/final-project-junemih/data_moods.csv", stringsAsFactors = FALSE)
+spotify_data <- read.csv("C:/UW/INFO201/FINAL/final-project-junemih/data_moods.csv", stringsAsFactors = FALSE)
 
-# Group years together
-grouped_data <- data_set %>%
-  mutate(Year = str_sub(release_date, start = 1, end = 4)) %>%
-  group_by(Year, mood) %>%
-  summarise(mean_valence = mean(valence, na.rm = TRUE))
+spotify_data$minutes <- spotify_data$length / 60000
 
-subset_data <- grouped_data %>%  filter(mood %in% c( "Happy", "Sad", "Energetic", "Calm"))
-
-
-# Manually Determine a BootSwatch Theme
-my_theme <- bs_theme(
-  bg = "#0b3d91", # background color
-  fg = "grey", # foreground color
-  primary = "#D2B48C", # primary color
-)
-# Update BootSwatch Theme
-my_theme <- bs_theme_update(my_theme, bootswatch = "cerulean")
-
-
-# Home page tab
-intro_tab <- tabPanel(
-  # Title of tab
-  "Introduction",
-  fluidPage(
-    # Include a Markdown file!
-    includeMarkdown("update here"),
-    p("update here")
-  )
-)
-
-select_widget <-
-  selectInput(
-    inputId = "mood_selection",
-    label = "Moods",
-    choices = unique(subset_data$mood),
-    selectize = TRUE,
-    # True allows you to select multiple choices...
-    multiple = TRUE,
-    selected = "Happy"
-  )
-
-
-
-slider_widget <- sliderInput(
-  inputId = "year_selection",
-  label = "Years",
-  min = min(1950),
-  max = max(2020),
-  value = c(1980, 2000),
-  sep = "")
-
-main_panel_plot <- mainPanel(
-  # Make plot interactive
-  plotlyOutput(outputId = "mood_trend_plot")
-)
-
-chart1 <- tabPanel(
-  "Chart 1",
-  sidebarLayout(
-    sidebarPanel(
-      select_widget,
-      slider_widget
+# Define UI for application
+ui <- fluidPage(
+  
+  # Application title
+  titlePanel("Title"),
+  h4("Authors"),
+  
+  
+  tabsetPanel(
+    
+    tabPanel("Introduction",
+             h1("Welcome to the Spotify Dataset Explorer!"),
+             p("This app allows you to explore the Spotify dataset and visualize different trends in the data.")
     ),
-    main_panel_plot
+    tabPanel("Chart 1",
+             selectInput("xvar1", "Select X Variable", choices = c("tempo", "loudness", "speechiness")),
+             selectInput("yvar1", "Select Y Variable", choices = c("danceability", "energy", "valence")),
+             plotlyOutput("chart1")
+    ),
+    tabPanel("Chart 2",
+             selectInput("xvar2", "Select X Variable", choices = c("acousticness", "instrumentalness", "liveness")),
+             selectInput("yvar2", "Select Y Variable", choices = c("danceability", "energy", "valence")),
+             plotlyOutput("chart2")
+    ),
+    tabPanel("Chart 3",
+             sliderInput(inputId = "duration",
+                         label = "Duration (minutes):",
+                         min = 0,
+                         max = max(spotify_data$length / 60000),
+                         value = c(0, max(spotify_data$length / 60000))),
+             plotlyOutput("chart3")
+    ),
+    tabPanel("Bye Bye",
+             h1("Thanks for using the Spotify Dataset Explorer!"),
+             includeMarkdown("C:/UW/INFO201/FINAL/final-project-junemih/final_takeaway.md"),
+             p("Goodbye!")
+    )
   )
-)
-
-ui <- navbarPage(
-  # Select Theme
-  theme = my_theme,
-  # Home page title
-  "Home Page",
-  intro_tab,
-  chart1
 )

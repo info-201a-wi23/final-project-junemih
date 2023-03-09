@@ -1,38 +1,53 @@
-library(shiny)
-library(plotly)
-library(bslib)
-library(shiny)
+library("shiny")
+library("ggplot2")
+library("dplyr")
+library("plotly")
 
-# Read in data
-data_set <- read.csv("C:/UW/INFO201/FINAL/final-project-junemih/data_moods.csv", stringsAsFactors = FALSE)
-
-grouped_data <- data_set %>%
-  mutate(Year = str_sub(release_date, start = 1, end = 4)) %>%
-  group_by(Year, mood) %>%
-  summarise(mean_valence = mean(valence, na.rm = TRUE))
-
-subset_data <- grouped_data%>%  filter(mood %in% c( "Happy", "Sad", "Energetic", "Calm"))
-
-# Define server logic required to draw a histogram
+# Define server logic
 server <- function(input, output) {
-
-  output$mood_plot <- renderPlotly({
+  
+  spotify_data <- read.csv("C:/UW/INFO201/FINAL/final-project-junemih/data_moods.csv", stringsAsFactors = FALSE)
+  
+  spotify_data$minutes <- spotify_data$length / 60000
+  
+  song_data <- reactive({
+    spotify_data %>%
+      mutate(duration_min = round(length / 60000, 2)) %>%
+      filter(popularity >= input$popularity_slider[1], popularity <= input$popularity_slider[2])
+  })
+  
+  output$chart1 <- renderPlotly({
+    ggplotly(
+      ggplot(data = spotify_data, aes_string(x = input$xvar1, y = input$yvar1)) +
+        geom_point(alpha = 0.5) +
+        labs(x = input$xvar1, y = input$yvar1, title = "Chart 1")
+    )
+  })
+  
+  output$chart2 <- renderPlotly({
+    ggplotly(
+      ggplot(data = spotify_data, aes_string(x = input$xvar2, y = input$yvar2)) +
+        scale_color_brewer(type = "qual", palette = "Set3") +
+        geom_point(alpha = 0.5) +
+        scale_color_brewer(type = "qual", palette = "Set3") +
+        labs(x = input$xvar2, y = input$yvar2, title = "Chart 2")
+    )
+  })
+  
+  output$chart3 <- renderPlotly({
     
-    filtered_data <- subset_data %>%
-      # Filter for year
-      filter(Gender %in% input$year_selection) %>%
-      # Filter for type of mood
-      filter(Mood %in% input$mood_selection)
+    filtered_songs <- filter(spotify_data,
+                             minutes >= input$duration[1] &
+                               minutes <= input$duration[2])
     
+    ggplotly(
+      ggplot(data = filtered_songs,
+             aes(x = minutes, y = popularity, color = mood)) +
+        geom_point() +
+        scale_color_brewer(type = "qual", palette = "Set2") +
+        labs(x = "Duration (minutes)", y = "Popularity", color = "Mood")
+    )
     
-    # Create ggplot2 line plot
-    mood_trend_plot <-ggplot(data = filtered_data) +
-      geom_line(mapping =
-                  aes(x = Year,
-                      y = mean_valence,
-                      color = mood))
-    
-    return(mood_trend_plot)
   })
   
 }
