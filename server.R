@@ -7,7 +7,7 @@ library("bslib")
 # Define server logic
 server <- function(input, output) {
   
-  spotify_data <- read.csv("/Users/junem/OneDrive/Desktop/info201/final-project-junemih/data_moods.csv", stringsAsFactors = FALSE)
+  spotify_data <- read.csv("data_moods.csv", stringsAsFactors = FALSE)
   
   spotify_data$year <- as.numeric(format(as.Date(spotify_data$release_date), "%Y"))
   
@@ -62,4 +62,6 @@ server <- function(input, output) {
     
   })
 }
+
+
 
