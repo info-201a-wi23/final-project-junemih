@@ -51,7 +51,7 @@ The analysis of the power of music has revealed that music is a universal langua
 
 With technology improving at a rapid rate, there is a a positive correlation between song popularity and the year in which it was released. As each year passes, the streams of the most popular song for that year is higher than the previous. This is due to the technological advances and switch from modern day stream services. As we can see in the chart1, the popularity of the most popular songs in the 2010's greatly surpasses the 90's and before because streaming services has made music accessible to almost everyone while in the 90's and before, they were relying on CD's, cassettes, vinyl, etc as a means of listening to music. Back then, people had to purchase individual songs/albums but in today world, everything is in the palm of our hands. Modern day steaming services have also made it easier for artist and producers to market as well through multiple platforms such as Instagram, Tiktok, Youtube, Spotify, etc. Modern technology and streaming services has allowed easier access to music which increases the the number of streams of the most popular song every year.
 
-![Popularity of songs over the years](popular_songs_over_the_years.png "Overtime, the popularity of songs grows more and more"
+![Popularity of songs over the years](popular_songs_over_the_years.png "Overtime, the popularity of songs grows more and more")
 
 ### Takeaway 2
 
