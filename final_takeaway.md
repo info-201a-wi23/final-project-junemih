@@ -12,7 +12,10 @@ With technology improving at a rapid rate, there is a a positive correlation bet
 
 In regards to how do the acousticness, instrumentalness, and liveness affect the song energy, acousticness and instrumentalness have a negative impact on the energy of a song, whereas liveness has a positive impact. This means that songs with high levels of acousticness and instrumentalness tend to have a more relaxed and low energy sounds. On the other hand, songs with high levels of liveness, such as those recorded in front of a live audience, tend to have a more exciting and intense sound, which can be ideal for energetic playlists. This can be used by artist and producers when creating a song to have more acoustic and instrumental if they are going for a lower energy song or more of a liveness if they want to create lots of energy in their music.
 
-![Chart showing the relationship between acousticness in a song vs energy levels](acousticness_vs_energy.png "No acousticness shows high energy while high acoustic shows little to no energy")
+![Chart showing the relationship between acousticness in a song vs energy levels](acousticness_vs_energy.png "No acousticness shows high energy while high acoustic shows little to no energy") 
+
+![Chart showing the relationship between liveness in a song vs energy levels](liveness_vs_energy.png "Liveness has the best relationship with energy showing high level's of energy across all levels of liveness")
+
 ## Takeaway 3
 
 While there is a correlation between a song's duration and mood and its popularity, our analysis showed that these factors do not solely determine a song's success. Other factors such as the artist's reputation, marketing, and overall musical quality also play important roles in determining a song's popularity. Therefore, it is important for musicians and producers to focus on creating high-quality music that is both unique and appealing to their target audience, rather than solely relying on duration and mood as determinants of success. It is also important for both musicians and producers to have quality marketing campaigns to boost the popularity of songs. As shown on graph3, there are a couple out liars who have done exceptionally well even though their songs are over 5+ minutes or under 2. This is through their marketing strategy and quality of music.
