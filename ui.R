@@ -4,7 +4,7 @@ library("plotly")
 library("ggplot2")
 library("plotly")
 
-spotify_data <- read.csv("C:/UW/INFO201/FINAL/final-project-junemih/data_moods.csv", stringsAsFactors = FALSE)
+spotify_data <- read.csv("/Users/junem/OneDrive/Desktop/info201/final-project-junemih/data_moods.csv", stringsAsFactors = FALSE)
 
 spotify_data$minutes <- spotify_data$length / 60000
 
@@ -23,7 +23,6 @@ ui <- fluidPage(
   tabsetPanel(
     
     tabPanel("Introduction", 
-             img(src='https://images.wondershare.com/recoverit/article/2020/08/unhide-songs-on-spotify-1.jpg', align = "center"),
              h3("Background"),
              p("Throughout history, music has been an integral part of human culture and society. Whether it's through traditional folk songs, classical compositions, or modern pop hits, music has the ability to evoke powerful emotions and affect our behavior in a variety of ways."),
              p("One of the key factors that can influence our response to music is tempo. It is commonly known that fast-paced music with a strong beat can stimulate our bodies and energize us, while slower, more melodic music can have a calming effect and help us relax. The rhythm of a song can also play a role in our behavior, with syncopated rhythms often associated with excitement and anticipation, and steady rhythms associated with stability and grounding."),
@@ -78,8 +77,10 @@ ui <- fluidPage(
              p("However, we could see on the graph that there are more pink(sad) and purple(happy) than orange(energetic) and green(calm) dots that have popularity levels of more than 75, and that there’s more green(calm) dots in the lower part of the popularity axis. Happy and sad songs tend to be more popular than energetic and calm songs because they evoke strong emotions in listeners that are easily relatable and memorable. Happy songs can create feelings of joy, nostalgia, and optimism, while sad songs can elicit emotions like melancholy, heartbreak, and introspection. These emotions are universal and often resonate with listeners, creating a strong connection between the listener and the music. In contrast, energetic and calm songs may not always have such a profound emotional impact on listeners. Energetic songs may be enjoyable to dance or exercise to, but they may not necessarily create a lasting emotional connection with listeners. Similarly, calm songs can be relaxing and soothing, but they may not evoke as much emotion as happy or sad songs. Additionally, happy and sad songs are often more accessible to a wider audience than energetic and calm songs. They are played more frequently on radio stations and music streaming platforms, which increases their exposure and popularity."),
     ),
     tabPanel("Conclusion",
-             includeMarkdown("C:/UW/INFO201/FINAL/final-project-junemih/final_takeaway.md"),
+             h3("Thanks for using the Spotify Dataset Explorer!"),
+             includeMarkdown("/Users/junem/OneDrive/Desktop/info201/final-project-junemih/final_takeaway.md"),
              p("Goodbye!")
     )
   )
 )
+

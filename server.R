@@ -6,13 +6,13 @@ library("bslib")
 
 # Define server logic
 server <- function(input, output) {
-
-  spotify_data <- read.csv("/Users/junem/Downloads/p03data.csv", stringsAsFactors = FALSE)
+  
+  spotify_data <- read.csv("/Users/junem/OneDrive/Desktop/info201/final-project-junemih/data_moods.csv", stringsAsFactors = FALSE)
   
   spotify_data$year <- as.numeric(format(as.Date(spotify_data$release_date), "%Y"))
   
   spotify_data$minutes <- spotify_data$length / 60000
-
+  
   subset_data <- reactive({
     subset(spotify_data, year >= input$year_range[1] & year <= input$year_range[2])
   })
@@ -62,3 +62,4 @@ server <- function(input, output) {
     
   })
 }
+
